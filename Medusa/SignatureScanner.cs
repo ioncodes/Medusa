@@ -30,8 +30,12 @@ namespace Medusa
                         {
                             if (tempList.Contains(instruction.OpCode))
                             {
-                                results.Add(method.FullName);
+                                tempList.Remove(instruction.OpCode);
                             }
+                        }
+                        if (tempList.Count == 0)
+                        {
+                            results.Add(method.FullName);
                         }
                     }
                 }
