@@ -5,7 +5,7 @@ using dnlib.DotNet.Emit;
 
 namespace Medusa
 {
-    public class SignatureScanner
+    internal class SignatureScanner
     {
         private ModuleDefMD module;
         private OpCode[] opCodes;

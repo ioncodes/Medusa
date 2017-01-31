@@ -36,6 +36,13 @@ namespace Medusa
                 Console.WriteLine(l);
             }
 
+            var obfScanner = new ObfuscatorScanner(module);
+            var obfs = obfScanner.Execute();
+            foreach (var o in obfs)
+            {
+                Console.WriteLine(o);
+            }
+
             Console.Read();
         }
     }

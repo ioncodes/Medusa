@@ -1,0 +1,73 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using dnlib.DotNet;
+
+namespace Medusa
+{
+    public class ObfuscatorScanner
+    {
+        private Dictionary<string, string> attributes = new Dictionary<string, string>()
+        {
+            {"ConfuserEx","ConfusedByAttribute"},
+            {"SmartAssembly","SmartAssembly"}
+        };
+
+        private string UnknownRegex = "";
+
+        private ModuleDefMD module;
+
+        public ObfuscatorScanner(ModuleDefMD module)
+        {
+            this.module = module;
+        }
+
+        public List<string> Execute()
+        {
+            var results = new List<string>();
+            var entropies = new List<double>();
+            foreach (var type in module.Types)
+            {
+                foreach (var obfuscator in attributes)
+                {
+                    if (type.FullName.Contains(obfuscator.Value))
+                    {
+                        results.Add(obfuscator.Key);
+                    }
+                    entropies.Add(ShannonEntropy(type.FullName));
+                }
+            }
+            if (results.Count == 0)
+            {
+                double entropy = entropies.Average();
+                if ((entropy > 1.5 && entropy < 2) || entropy > 4 && entropy < 5)
+                {
+                    results.Add("Possible unknown obfuscator");
+                }
+            }
+            return results.Distinct().ToList();
+        }
+
+        private double ShannonEntropy(string s)
+        {
+            var map = new Dictionary<char, int>();
+            foreach (char c in s)
+            {
+                if (!map.ContainsKey(c))
+                    map.Add(c, 1);
+                else
+                    map[c] += 1;
+            }
+
+            double result = 0.0;
+            int len = s.Length;
+            foreach (var item in map)
+            {
+                var frequency = (double)item.Value / len;
+                result -= frequency * (Math.Log(frequency) / Math.Log(2));
+            }
+
+            return result;
+        }
+    }
+}
