@@ -67,11 +67,11 @@ namespace Medusa
                         {
                             if (searchMode == SearchModes.Contains && s.Contains(operand))
                             {
-                                results.Add(operand);
+                                results.Add("Found string at " + method.FullName + " -> " + operand);
                             }
                             else if (searchMode == SearchModes.MatchWholeWord && s == operand)
                             {
-                                results.Add(operand);
+                                results.Add("Found string at " + method.FullName + " -> " +  operand);
                             }
                         }
                     }

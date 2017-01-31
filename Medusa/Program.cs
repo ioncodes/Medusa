@@ -43,6 +43,19 @@ namespace Medusa
                 Console.WriteLine(o);
             }
 
+            var nameScanner = new NameScanner(module);
+            var names = nameScanner.Execute();
+            foreach (var name in names)
+            {
+                Console.WriteLine(name);
+            }
+
+            var secretsScanner = new SecretsScanner(module);
+            var secrets = secretsScanner.Execute();
+            foreach (var secret in secrets)
+            {
+                Console.WriteLine(secret);
+            }
             Console.Read();
         }
     }

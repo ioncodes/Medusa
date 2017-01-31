@@ -35,7 +35,7 @@ namespace Medusa
                         }
                         if (tempList.Count == 0)
                         {
-                            results.Add(method.FullName);
+                            results.Add("Signature found at " + method.FullName);
                         }
                     }
                 }

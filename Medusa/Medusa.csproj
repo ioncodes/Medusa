@@ -44,9 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NameScanner.cs" />
     <Compile Include="ObfuscatorScanner.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SecretsScanner.cs" />
     <Compile Include="SignatureScanner.cs" />
     <Compile Include="StringScanner.cs" />
   </ItemGroup>

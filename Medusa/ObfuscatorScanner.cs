@@ -32,7 +32,7 @@ namespace Medusa
                 {
                     if (type.FullName.Contains(obfuscator.Value))
                     {
-                        results.Add(obfuscator.Key);
+                        results.Add("Found obfuscator: " + obfuscator.Key);
                     }
                     entropies.Add(ShannonEntropy(type.FullName));
                 }
@@ -59,15 +59,9 @@ namespace Medusa
                     map[c] += 1;
             }
 
-            double result = 0.0;
             int len = s.Length;
-            foreach (var item in map)
-            {
-                var frequency = (double)item.Value / len;
-                result -= frequency * (Math.Log(frequency) / Math.Log(2));
-            }
 
-            return result;
+            return map.Select(item => (double) item.Value / len).Aggregate(0.0, (current, frequency) => current - frequency * (Math.Log(frequency) / Math.Log(2)));
         }
     }
 }
