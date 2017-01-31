@@ -7,19 +7,16 @@ namespace Medusa
 {
     public class ObfuscatorScanner
     {
-        private Dictionary<string, string> attributes = new Dictionary<string, string>()
-        {
-            {"ConfuserEx","ConfusedByAttribute"},
-            {"SmartAssembly","SmartAssembly"}
-        };
+        private Dictionary<string, string> attributes;
 
         private string UnknownRegex = "";
 
         private ModuleDefMD module;
 
-        public ObfuscatorScanner(ModuleDefMD module)
+        public ObfuscatorScanner(ModuleDefMD module, Dictionary<string,string> attributes)
         {
             this.module = module;
+            this.attributes = attributes;
         }
 
         public List<string> Execute()

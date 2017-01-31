@@ -6,13 +6,8 @@ namespace Medusa
 {
     internal class NameScanner
     {
-        private string[] stringList = {"License","Password","Key","DRM","Obfuscator","Obfuscation","Hack","Crack"};
+        private string[] stringList;
         private ModuleDefMD module;
-
-        public NameScanner(ModuleDefMD module)
-        {
-            this.module = module;
-        }
 
         public NameScanner(ModuleDefMD module, string[] stringList)
         {
